@@ -16,7 +16,7 @@
         <th>Quant difficulty</th>
         <th>Structure difficulty</th>
         <th>Page</th>
-        <th>User</th>
+        <th>School</th>
         <th>Actions</th>
       </tr>
 
@@ -30,7 +30,7 @@
           <td><%= the_case.quant %></td>
           <td><%= the_case.structure %></td>
           <td><%= the_case.page %></td>
-          <td><%= the_case.user_id %></td>
+          <td><%= the_case.user.school.name %></td>
           <td>
             <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
             <a href="/cases/<%= the_case.id %>/edit" class="btn btn-warning">Edit</a>

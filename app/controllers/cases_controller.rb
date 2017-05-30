@@ -6,8 +6,9 @@ class CasesController < ApplicationController
   end
 
   def top_cases
-    @cases = Case.all
-
+  @cases=Case.all.sort_by do |the_case|
+    the_case.favorites.count
+  end.take(3)
     render("cases/top_cases.html.erb")
   end
 
