@@ -47,3 +47,14 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Only add these gems in a development environment
+group :development do
+  gem 'annotate'
+  gem 'better_errors'
+  gem 'starter_generators', :git => 'git://github.com/raghubetina/starter_generators.git'
+end
+
+gem 'devise'
+
+gem 'bcrypt', platforms: :ruby

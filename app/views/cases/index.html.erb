@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h1>
+    Cases
+    <a href="/cases/new" class="btn btn-lg btn-success">New Case</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Case name</th>
+        <th>Case type</th>
+        <th>Interviewer led?</th>
+        <th>Industry</th>
+        <th>Quant difficulty</th>
+        <th>Structure difficulty</th>
+        <th>Page</th>
+        <th>User</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @cases.each do |the_case| %>
+      <tr>
+        <td>
+          <%= the_case.name %></td>
+          <td><%= the_case.case_type %></td>
+          <td><%= the_case.interviewer_led %></td>
+          <td><%= the_case.industry %></td>
+          <td><%= the_case.quant %></td>
+          <td><%= the_case.structure %></td>
+          <td><%= the_case.page %></td>
+          <td><%= the_case.user_id %></td>
+          <td>
+            <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
+            <a href="/cases/<%= the_case.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_case/<%= the_case.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>

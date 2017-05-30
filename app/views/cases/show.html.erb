@@ -1,0 +1,47 @@
+<div class="page-header">
+  <h3>Case #<%= @case.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+
+      <dt>Name</dt>
+      <dd><%= @case.name %></dd>
+
+      <dt>Case type</dt>
+      <dd><%= @case.case_type %></dd>
+
+      <dt>Industry</dt>
+      <dd><%= @case.industry %></dd>
+
+      <dt>Interviewer led?</dt>
+      <dd><%= @case.interviewer_led %></dd>
+
+      <dt>Page</dt>
+      <dd><%= @case.page %></dd>
+
+      <!-- <dt>User</dt>
+      <dd><%= @case.user_id %></dd> -->
+
+      <dt>Quant</dt>
+      <dd><%= @case.quant %></dd>
+
+      <dt>Structure</dt>
+      <dd><%= @case.structure %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/cases" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/cases/<%= @case.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_case/<%= @case.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

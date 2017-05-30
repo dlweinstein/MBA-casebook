@@ -1,0 +1,21 @@
+<div class="page-header">
+  <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @user.first_name %> <%= @user.last_name %></dd>
+
+      <dt>Email</dt>
+      <dd><%= @user.email %></dd>
+
+      <dt>Cases</dt>
+      <dd>
+        <ul class="list-group">
+        <% @user.cases.each do |the_case| %>
+          <li class="list-group-item">
+              <%= the_case.name %>
+          </li>
+        <% end %>
