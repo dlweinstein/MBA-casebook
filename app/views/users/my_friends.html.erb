@@ -6,7 +6,7 @@
 </div>
 
 <div>
-  <h3>Received Friend Requests</h3>
+  <h3>People Who Follow Me</h3>
 </div>
 
 
@@ -17,6 +17,9 @@
         <th>School</th>
         <th>First name</th>
         <th>Last name</th>
+        <th>Class Year</th>
+        <th>Email</th>
+        <th>Friend</th>
         <th>Actions</th>
       </tr>
 
@@ -25,6 +28,31 @@
         <td><%= follower.school.name %></td>
         <td><%= follower.first_name %></td>
         <td><%= follower.last_name %></td>
+        <td><%= follower.class_year %></td>
+        <td><%= follower.email %></td>
+
+        <td>
+          <% friend = Friend.find_by(:recipient_id => follower.id, :sender_id => current_user.id) %>
+          <% if friend.present? %>
+          <a href="/delete_friend/<%= friend.id %>" class="btn btn-link">
+            <i class="fa fa-star"></i>
+          </a>
+
+          <% else %>
+          <form action="/create_friend" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+            <input type="hidden" name="recipient_id" value="<%= user.id %>">
+
+            <input type="hidden" name="sender_id" value="<%= current_user.id %>">
+
+            <button class="btn btn-link">
+              <i class="fa fa-star-o"></i>
+            </button>
+          </form>
+          <% end %>
+        </td>
         <td><a href="/users/<%= follower.id %>" class="btn btn-primary">Show</a></td>
       </tr>
       <% end %>
@@ -33,7 +61,7 @@
 </div>
 
 <div>
-  <h3>Sent Friend Requests</h3>
+  <h3>People Who I Follow</h3>
 </div>
 
 
@@ -44,6 +72,8 @@
         <th>School</th>
         <th>First name</th>
         <th>Last name</th>
+        <th>Class Year</th>
+        <th>Email</th>
         <th>Actions</th>
       </tr>
 
@@ -52,6 +82,8 @@
         <td><%= following.school.name %></td>
         <td><%= following.first_name %></td>
         <td><%= following.last_name %></td>
+        <td><%= following.class_year %></td>
+        <td><%= following.email %></td>
         <td>
           <a href="/users/<%= following.id %>" class="btn btn-primary">Show</a>
 

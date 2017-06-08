@@ -18,23 +18,12 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for sender_id -->
-      <div class="form-group">
-        <label for="sender_id" class="control-label">
-          Sender
-        </label>
-
-        <input type="text" id="sender_id" name="sender_id" placeholder="Sender" class="form-control" value="<%= @message.sender_id %>">
-      </div>
+      <!-- Hidden input for sender_id -->
+      <input type="hidden" name="sender_id" value="<%= current_user.id %>">
 
       <!-- Label and input for receiver_id -->
-      <div class="form-group">
-        <label for="receiver_id" class="control-label">
-          Receiver
-        </label>
 
-        <input type="text" id="receiver_id" name="receiver_id" placeholder="Receiver" class="form-control" value="<%= @message.receiver_id %>">
-      </div>
+      <input type="hidden" name="receiver_id" value="<%= @message.receiver_id %>">
 
       <!-- Label and input for body -->
       <div class="form-group">

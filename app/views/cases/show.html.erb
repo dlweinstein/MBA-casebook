@@ -30,8 +30,8 @@
       <dt>Structure</dt>
       <dd><%= @case.structure %></dd>
 
-    </dl>
-
+      <dt>Favorite</dt>
+      <dd>
 
       <% favorite = Favorite.find_by(:case_id => @case.id, :user_id => current_user.id) %>
       <% if favorite.present? %>
@@ -54,7 +54,8 @@
 
       </form>
       <% end %>
-
+</dd>
+</dl>
     <!-- If current user is case "owner"  -->
     <% if current_user.id ==@case.user_id %>
 

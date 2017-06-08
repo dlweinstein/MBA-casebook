@@ -1,25 +1,54 @@
 <div class="page-header">
-  <h3>Name: <%= @user.first_name %> <%= @user.last_name %>
-    <p>Email: <%= @user.email %></h3></p>
+  <h5><p>Student: <%= @user.first_name %> <%= @user.last_name %></p>
+    <p>Email: <%= @user.email %></p>
+
+    <% if current_user.id !=@user.id %>
+
+    <p> Friends
+      <td>
+        <% friend = Friend.find_by(:recipient_id => @user.id, :sender_id => current_user.id) %>
+        <% if friend.present? %>
+        <a href="/delete_friend/<%= friend.id %>" class="btn btn-link">
+          <i class="fa fa-star"></i>
+        </a>
+
+        <% else %>
+        <form action="/create_friend" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <input type="hidden" name="recipient_id" value="<%= @user.id %>">
+
+          <input type="hidden" name="sender_id" value="<%= current_user.id %>">
+
+          <button class="btn btn-link">
+            <i class="fa fa-star-o"></i>
+          </button>
+        </form>
+        <% end %>
+      </td>
+    </p>
+
+    <% end %>
+
+  </h5>
 </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table table-striped table-hover">
-            <tr>
-              <th>Case name</th>
-              <th>Actions</th>
-            </tr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Case name</th>
+        <th>Actions</th>
+      </tr>
 
-            <% @user.cases.each do |the_case| %>
-            <tr>
-              <td><%= the_case.name %></td>
-              <td>
-                <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
-                <a href="/cases/<%= the_case.id %>/edit" class="btn btn-warning">Edit</a>
-                <a href="/delete_case/<%= the_case.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-              </td>
-            </tr>
-            <% end %>
-          </div>
-        </div>
+      <% @user.cases.each do |the_case| %>
+      <tr>
+        <td><%= the_case.name %></td>
+        <td>
+          <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
+        </td>
+      </tr>
+      <% end %>
+    </div>
+  </div>

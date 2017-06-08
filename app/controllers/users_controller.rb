@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 def my_friends
-# @followers=current_user.followers
-# @followings=current_user.followings
 
   render("my_friends.html.erb")
 end

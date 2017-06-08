@@ -18,6 +18,15 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @case.name %>">
+      </div>
+
       <!-- Label and input for case_type -->
       <div class="form-group">
         <label for="case_type" class="control-label">
@@ -27,13 +36,6 @@
         <input type="text" id="case_type" name="case_type" placeholder="Case type" class="form-control" value="<%= @case.case_type %>">
       </div>
 
-      <!-- Label and input for interviewer_led -->
-      <div class="checkbox">
-        <label for="interviewer_led">
-          <input type="checkbox" id="interviewer_led" name="interviewer_led" value="1" <%= "checked" if @case.interviewer_led %>>
-          Interviewer led
-        </label>
-      </div>
 
       <!-- Label and input for industry -->
       <div class="form-group">
@@ -43,6 +45,16 @@
 
         <input type="text" id="industry" name="industry" placeholder="Industry" class="form-control" value="<%= @case.industry %>">
       </div>
+      
+      <!-- Label and input for interviewer_led -->
+      <div class="checkbox">
+        <label for="interviewer_led">
+          <input type="checkbox" id="interviewer_led" name="interviewer_led" value="1" <%= "checked" if @case.interviewer_led %>>
+          Interviewer led
+        </label>
+      </div>
+
+
 
       <!-- Label and input for page -->
       <div class="form-group">
@@ -54,22 +66,10 @@
       </div>
 
       <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @case.user_id %>">
-      </div>
 
-      <!-- Label and input for name -->
-      <div class="form-group">
-        <label for="name" class="control-label">
-          Name
-        </label>
 
-        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @case.name %>">
-      </div>
 
       <!-- Label and input for quant -->
       <div class="form-group">

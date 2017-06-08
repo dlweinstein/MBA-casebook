@@ -17,7 +17,8 @@
         <th>Quant difficulty</th>
         <th>Structure difficulty</th>
         <th>Page</th>
-        <th>Favorite</th>
+        <th>Favorited</th>
+        <th>Number of Favorites</th>
         <th>Actions</th>
       </tr>
 
@@ -55,7 +56,7 @@
           </form>
           <% end %>
         </td>
-
+<td><%= the_case.favorites.count %></td>
         <td>
           <!-- If current user is case "owner"  -->
           <% if current_user.id ==the_case.user_id %>
