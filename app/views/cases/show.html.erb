@@ -9,6 +9,9 @@
       <dt>Name</dt>
       <dd><%= @case.name %></dd>
 
+      <dt>School</dt>
+      <dd><%= @case.user.school.name %></dd>
+
       <dt>Case type</dt>
       <dd><%= @case.case_type %></dd>
 
@@ -21,9 +24,6 @@
       <dt>Page</dt>
       <dd><%= @case.page %></dd>
 
-      <dt>School</dt>
-      <dd><%= @case.school %></dd>
-
       <dt>Quant</dt>
       <dd><%= @case.quant %></dd>
 
@@ -31,6 +31,32 @@
       <dd><%= @case.structure %></dd>
 
     </dl>
+
+
+      <% favorite = Favorite.find_by(:case_id => @case.id, :user_id => current_user.id) %>
+      <% if favorite.present? %>
+      <a href="/delete_favorite/<%= favorite.id %>" class="btn btn-link">
+        <i class="fa fa-heart"></i>
+      </a>
+
+      <% else %>
+      <form action="/create_favorite" method="post">
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+        <input type="hidden" name="case_id" value="<%= @case.id %>">
+
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+        <button class="btn btn-link">
+          <i class="fa fa-heart-o"></i>
+        </button>
+
+      </form>
+      <% end %>
+
+    <!-- If current user is case "owner"  -->
+    <% if current_user.id ==@case.user_id %>
 
     <div class="btn-group btn-group-justified">
       <a href="/cases" class="btn btn-primary">
@@ -43,5 +69,13 @@
         Delete
       </a>
     </div>
+
+    <% else %>
+    <!-- Otherwise, only display back action  -->
+    <a href="/cases" class="btn btn-primary">
+      Back
+    </a>
+    <% end %>
+
   </div>
 </div>

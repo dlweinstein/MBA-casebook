@@ -2,7 +2,7 @@ class SchoolsController < ApplicationController
   def index
     @schools = School.all
 
-    render("schools/index.html.erb")
+    # render("schools/index.html.erb")
   end
 
   def show

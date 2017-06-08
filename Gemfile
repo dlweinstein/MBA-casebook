@@ -8,11 +8,16 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', group :development
-gem 'pg', group :production
-gem 'rails_12factor', group :production
+gem 'devise'
 
+gem 'bcrypt', platforms: :ruby
+
+gem 'starter_generators', :git => 'git://github.com/raghubetina/starter_generators.git'
+
+gem 'pg'
+gem 'rails_12factor'
+
+  gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -43,21 +48,13 @@ group :development, :test do
   gem 'byebug', platform: :mri
 end
 
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-end
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Only add these gems in a development environment
 group :development do
+  gem 'web-console', '>= 3.3.0'
   gem 'annotate'
   gem 'better_errors'
-  gem 'starter_generators', :git => 'git://github.com/raghubetina/starter_generators.git'
+  gem 'spring'
 end
-
-gem 'devise'
-
-gem 'bcrypt', platforms: :ruby

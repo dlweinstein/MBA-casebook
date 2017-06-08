@@ -1,17 +1,22 @@
 class CasesController < ApplicationController
+  def my_favorites
+    @cases=current_user.favorited_cases
+
+    render("my_favorites.html.erb")
+  end
+
+  def top_cases
+    @cases=Case.all.sort_by do |the_case|
+      the_case.favorites.count
+    end.take(3)
+    render("top_cases.html.erb")
+  end
+
   def index
     @cases = Case.all
 
     render("cases/index.html.erb")
   end
-
-  def top_cases
-  @cases=Case.all.sort_by do |the_case|
-    the_case.favorites.count
-  end.take(3)
-    render("cases/top_cases.html.erb")
-  end
-
 
   def show
     @case = Case.find(params[:id])

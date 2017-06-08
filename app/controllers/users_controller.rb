@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+def my_friends
+# @followers=current_user.followers
+# @followings=current_user.followings
+
+  render("my_friends.html.erb")
+end
+
   def index
     @users = User.all
 
@@ -11,9 +18,4 @@ class UsersController < ApplicationController
 
     render("users/show.html.erb")
   end
-
-  def myfavorites
-    render("/users/my_favorites.html.erb")
-    end
-
 end

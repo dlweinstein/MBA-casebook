@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   get "/cases/:id", :controller => "cases", :action => "show"
 
   get "/top_cases", :controller => "cases", :action => "top_cases"
-
+  get "/my_favorites", :controller => "cases", :action => "my_favorites"
 
   # UPDATE
   get "/cases/:id/edit", :controller => "cases", :action => "edit"
@@ -94,9 +94,7 @@ Rails.application.routes.draw do
     get "/users", :controller => "users", :action => "index"
     get "/users/:id", :controller => "users", :action => "show"
 
-    # READ for my_likes
-    get "/my_favorites", :controller => "users", :action => "myfavorites"
-
+get "/my_friends", :controller => "users", :action => "my_friends"
 
 root 'cases#index'
 

@@ -9,6 +9,7 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
+        <th>School</th>
         <th>Case name</th>
         <th>Case type</th>
         <th>Interviewer led?</th>
@@ -16,28 +17,62 @@
         <th>Quant difficulty</th>
         <th>Structure difficulty</th>
         <th>Page</th>
-        <th>School</th>
+        <th>Favorite</th>
         <th>Actions</th>
       </tr>
 
       <% @cases.each do |the_case| %>
       <tr>
+        <td><%= the_case.user.school.name %></td>
+        <td><%= the_case.name %></td>
+        <td><%= the_case.case_type %></td>
+        <td><%= the_case.interviewer_led %></td>
+        <td><%= the_case.industry %></td>
+        <td><%= the_case.quant %></td>
+        <td><%= the_case.structure %></td>
+        <td><%= the_case.page %></td>
+
         <td>
-          <%= the_case.name %></td>
-          <td><%= the_case.case_type %></td>
-          <td><%= the_case.interviewer_led %></td>
-          <td><%= the_case.industry %></td>
-          <td><%= the_case.quant %></td>
-          <td><%= the_case.structure %></td>
-          <td><%= the_case.page %></td>
-          <td><%= the_case.user.school.name %></td>
-          <td>
-            <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
-            <a href="/cases/<%= the_case.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_case/<%= the_case.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          </td>
-        </tr>
-        <% end %>
-      </table>
-    </div>
+          <% favorite = Favorite.find_by(:case_id => the_case.id, :user_id => current_user.id) %>
+          <% if favorite.present? %>
+          <a href="/delete_favorite/<%= favorite.id %>" class="btn btn-link">
+            <i class="fa fa-heart"></i>
+          </a>
+
+          <% else %>
+          <form action="/create_favorite" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+            <input type="hidden" name="case_id" value="<%= the_case.id %>">
+
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+            <button class="btn btn-link">
+              <i class="fa fa-heart-o"></i>
+            </button>
+
+          </form>
+          <% end %>
+        </td>
+
+        <td>
+          <!-- If current user is case "owner"  -->
+          <% if current_user.id ==the_case.user_id %>
+
+          <!-- Show all three actions  -->
+          <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
+          <a href="/cases/<%= the_case.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_case/<%= the_case.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+
+          <% else %>
+          <!-- Otherwise, only display show action  -->
+          <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
+
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
   </div>
+</div>

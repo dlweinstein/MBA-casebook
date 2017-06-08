@@ -2,18 +2,62 @@
   <h3>Message #<%= @message.id %></h3>
 </div>
 
+<!-- If current user is the receiver -->
+<% if current_user.id ==@message.receiver_id %>
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Sender</dt>
-      <dd><%= @message.sender_id %></dd>
-
-      <dt>Receiver</dt>
-      <dd><%= @message.receiver_id %></dd>
-
+      <dt>Sender First Name</dt>
+      <dd><%= @message.sender.first_name %></dd>
+      <dt>Sender Last Name</dt>
+      <dd><%= @message.sender.last_name %></dd>
+      <dt>Date</dt>
+      <dd><%= @message.created_at %></dd>
       <dt>Body</dt>
       <dd><%= @message.body %></dd>
+    </dl>
 
+    <div class="media-body">
+      <form action="/create_message" method="post">
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+        <input type="hidden" name="receiver_id" value="<%= @message.sender.id %>">
+
+        <input type="hidden" name="sender_id" value="<%= current_user.id %>">
+
+        <!-- Label and input for body -->
+        <div class="form-group">
+          <label for="body" class="sr-only">
+            Message
+          </label>
+
+          <input type="text" id="body" name="body" placeholder="Reply to this message..." class="form-control" required>
+        </div>
+
+        <button class="btn btn-success">
+          Create Message
+        </button>
+        or
+        <a href="/messages">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- If current user is the sender -->
+<% else %>
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Receiver First Name</dt>
+      <dd><%= @message.receiver.first_name %></dd>
+      <dt>Receiver Last Name</dt>
+      <dd><%= @message.receiver.last_name %></dd>
+      <dt>Date</dt>
+      <dd><%= @message.created_at %></dd>
+      <dt>Body</dt>
+      <dd><%= @message.body %></dd>
     </dl>
 
     <div class="btn-group btn-group-justified">
@@ -29,3 +73,4 @@
     </div>
   </div>
 </div>
+<% end %>

@@ -1,11 +1,11 @@
 <!-- Validation failure messages -->
 <% if @message.errors.any? %>
-  <% @message.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @message.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <div class="page-header">
@@ -18,28 +18,22 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for sender_id -->
-      <div class="form-group">
-        <label for="sender_id" class="control-label">
-          Sender
-        </label>
-
-        <input type="text" id="sender_id" name="sender_id" placeholder="Sender" class="form-control" value="<%= @message.sender_id %>">
-      </div>
+      <!-- Hidden input for sender_id -->
+      <input type="hidden" name="sender_id" value="<%= current_user.id %>">
 
       <!-- Label and input for receiver_id -->
       <div class="form-group">
         <label for="receiver_id" class="control-label">
-          Receiver
+          Who Do you Want to Send a Message to?
         </label>
 
-        <input type="text" id="receiver_id" name="receiver_id" placeholder="Receiver" class="form-control" value="<%= @message.receiver_id %>">
+        <%= select_tag(:receiver_id, options_from_collection_for_select(User.all, :id, :first_name, @message.receiver_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for body -->
       <div class="form-group">
         <label for="body" class="control-label">
-          Body
+          What do you want to say?
         </label>
 
         <textarea id="body" name="body" placeholder="Body" class="form-control" rows="3"><%= @message.body %></textarea>

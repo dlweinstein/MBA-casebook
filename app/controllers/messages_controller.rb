@@ -24,12 +24,10 @@ class MessagesController < ApplicationController
     @message.receiver_id = params[:receiver_id]
     @message.body = params[:body]
 
-    save_status = @message.save
-
-    if save_status == true
-      redirect_to("/messages/#{@message.id}", :notice => "Message created successfully.")
+    if @message.save
+      redirect_to :back, :notice => "Message sent successfully."
     else
-      render("messages/new.html.erb")
+      render 'new'
     end
   end
 
@@ -46,13 +44,11 @@ class MessagesController < ApplicationController
     @message.receiver_id = params[:receiver_id]
     @message.body = params[:body]
 
-    save_status = @message.save
-
-    if save_status == true
-      redirect_to("/messages/#{@message.id}", :notice => "Message updated successfully.")
-    else
-      render("messages/edit.html.erb")
-    end
+    if @message.save
+        redirect_to "/messages", :notice => "Message updated successfully."
+      else
+        render 'edit'
+      end
   end
 
   def destroy
@@ -60,10 +56,6 @@ class MessagesController < ApplicationController
 
     @message.destroy
 
-    if URI(request.referer).path == "/messages/#{@message.id}"
-      redirect_to("/", :notice => "Message deleted.")
-    else
-      redirect_to(:back, :notice => "Message deleted.")
-    end
+      redirect_to :back, :notice => "Message deleted."
   end
 end

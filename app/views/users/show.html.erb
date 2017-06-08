@@ -1,21 +1,25 @@
 <div class="page-header">
-  <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+  <h3>Name: <%= @user.first_name %> <%= @user.last_name %>
+    <p>Email: <%= @user.email %></h3></p>
 </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Name</dt>
-      <dd><%= @user.first_name %> <%= @user.last_name %></dd>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-striped table-hover">
+            <tr>
+              <th>Case name</th>
+              <th>Actions</th>
+            </tr>
 
-      <dt>Email</dt>
-      <dd><%= @user.email %></dd>
-
-      <dt>Cases</dt>
-      <dd>
-        <ul class="list-group">
-        <% @user.cases.each do |the_case| %>
-          <li class="list-group-item">
-              <%= the_case.name %>
-          </li>
-        <% end %>
+            <% @user.cases.each do |the_case| %>
+            <tr>
+              <td><%= the_case.name %></td>
+              <td>
+                <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
+                <a href="/cases/<%= the_case.id %>/edit" class="btn btn-warning">Edit</a>
+                <a href="/delete_case/<%= the_case.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+              </td>
+            </tr>
+            <% end %>
+          </div>
+        </div>
