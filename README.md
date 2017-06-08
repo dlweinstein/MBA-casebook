@@ -1,17 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Here is a link to my Domain modeling on ideas.firstdraft.com:
+https://ideas.firstdraft.com/ideas/1062
 
 Things you may want to cover:
 
-* Ruby version
+Users can:
+* Register as a student of an MBA program
 
-* System dependencies
+* Submit cases to the guide
 
-* Configuration
+* Favorite cases they particularly like
 
-* Database creation
+* See a list of the top cases (ranked by the number of overall favorites a case have
 
 * Database initialization
 
