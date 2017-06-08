@@ -3,23 +3,17 @@
 Here is a link to my Domain modeling on ideas.firstdraft.com:
 https://ideas.firstdraft.com/ideas/1062
 
-Things you may want to cover:
-
 Users can:
 * Register as a student of an MBA program
 
 * Submit cases to the guide
 
-* Favorite cases they particularly like
+* Favorite cases they particularly like/find useful
 
-* See a list of the top cases (ranked by the number of overall favorites a case have
+* See a list of the top cases (ranked by the number of overall favorites a case has)
 
-* Database initialization
+* Send messages to other users on the site
 
-* How to run the test suite
+* Send/receive friend requests
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* See if a friend posted a case
