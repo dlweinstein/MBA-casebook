@@ -13,6 +13,7 @@ end
   def show
     @user = User.find(params[:id])
     @case = Case.new
+    @message = Message.new
 
     render("users/show.html.erb")
   end

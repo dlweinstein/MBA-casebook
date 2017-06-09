@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h5><p>Student: <%= @user.first_name %> <%= @user.last_name %></p>
+  <h5><p><b>Student Details</b></p><p>Student: <%= @user.first_name %> <%= @user.last_name %></p>
     <p>Email: <%= @user.email %></p>
 
     <% if current_user.id !=@user.id %>
@@ -28,27 +28,54 @@
         <% end %>
       </td>
     </p>
-
     <% end %>
-
   </h5>
 </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr>
-        <th>Case name</th>
-        <th>Actions</th>
-      </tr>
+  <h5><p><b>Send a message</b></p></h5>
+<p>
+    <form action="/create_message" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <% @user.cases.each do |the_case| %>
-      <tr>
-        <td><%= the_case.name %></td>
-        <td>
-          <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
-        </td>
-      </tr>
-      <% end %>
-    </div>
-  </div>
+              <!-- Label and input for body -->
+              <div class="form-group">
+                <label for="body" class="control-label">
+                  Body
+                </label>
+                <input type="text" id="body" name="body" placeholder="Message text" class="form-control" value="<%= @message.body %>">
+              </div>
+
+              <!-- Hidden input for sender_id -->
+              <input name="sender_id" type="hidden" value="<%= current_user.id %>">
+
+              <!-- Hidden input for receiver_id -->
+              <input name="receiver_id" type="hidden" value="<%= @user.id %>">
+
+              <button class="btn btn-success">
+                Send Message
+              </button>
+              or
+              <a href="/messages">Cancel</a>
+            </form>
+  </p>
+  
+    <h5><p><b>Cases Submitted</b></p></h5>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-striped table-hover">
+          <tr>
+            <th>Case name</th>
+            <th>Actions</th>
+          </tr>
+
+          <% @user.cases.each do |the_case| %>
+          <tr>
+            <td><%= the_case.name %></td>
+            <td>
+              <a href="/cases/<%= the_case.id %>" class="btn btn-primary">Show</a>
+            </td>
+          </tr>
+          <% end %>
+        </div>
+      </div>

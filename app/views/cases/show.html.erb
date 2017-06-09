@@ -30,6 +30,18 @@
       <dt>Structure</dt>
       <dd><%= @case.structure %></dd>
 
+  <dt>Submitted by a Friend?</dt>
+      <dd>
+        <% friend = Friend.find_by(:recipient_id => @case.user.id, :sender_id => current_user.id) %>
+        <% if friend.present? %>
+        <i class="fa fa-star"></i>
+        <% else %>
+        <i class="fa fa-star-o"></i>
+        <% end %>
+      </dd>
+
+
+
       <dt>Favorite</dt>
       <dd>
 

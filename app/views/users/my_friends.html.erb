@@ -43,7 +43,7 @@
             <!-- Hidden input for authenticity token to protect from forgery -->
             <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-            <input type="hidden" name="recipient_id" value="<%= user.id %>">
+            <input type="hidden" name="recipient_id" value="<%= follower.id %>">
 
             <input type="hidden" name="sender_id" value="<%= current_user.id %>">
 

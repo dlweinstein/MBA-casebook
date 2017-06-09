@@ -17,6 +17,7 @@
         <th>Quant difficulty</th>
         <th>Structure difficulty</th>
         <th>Page</th>
+        <th>Submitted by a Friend?</th>
         <th>Favorited</th>
         <th>Number of Favorites</th>
         <th>Actions</th>
@@ -32,7 +33,14 @@
         <td><%= the_case.quant %></td>
         <td><%= the_case.structure %></td>
         <td><%= the_case.page %></td>
-
+        <td>
+          <% friend = Friend.find_by(:recipient_id => the_case.user.id, :sender_id => current_user.id) %>
+          <% if friend.present? %>
+          <i class="fa fa-star"></i>
+          <% else %>
+          <i class="fa fa-star-o"></i>
+          <% end %>
+        </td>
         <td>
           <% favorite = Favorite.find_by(:case_id => the_case.id, :user_id => current_user.id) %>
           <% if favorite.present? %>
@@ -56,7 +64,7 @@
           </form>
           <% end %>
         </td>
-<td><%= the_case.favorites.count %></td>
+        <td><%= the_case.favorites.count %></td>
         <td>
           <!-- If current user is case "owner"  -->
           <% if current_user.id ==the_case.user_id %>

@@ -18,6 +18,7 @@
         <th>Quant difficulty</th>
         <th>Structure difficulty</th>
         <th>Page</th>
+        <th>Submitted by a Friend?</th>
         <th>Actions</th>
       </tr>
 
@@ -31,6 +32,16 @@
         <td><%= the_case.quant %></td>
         <td><%= the_case.structure %></td>
         <td><%= the_case.page %></td>
+
+        <td>
+          <% friend = Friend.find_by(:recipient_id => the_case.user.id, :sender_id => current_user.id) %>
+          <% if friend.present? %>
+          <i class="fa fa-star"></i>
+          <% else %>
+          <i class="fa fa-star-o"></i>
+          <% end %>
+        </td>
+
         <td>
           <!-- If current user is case "owner"  -->
           <% if current_user.id ==the_case.user_id %>
